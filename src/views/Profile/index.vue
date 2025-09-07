@@ -90,7 +90,7 @@ import { ref, reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { ElMessage, ElForm, ElFormItem, ElInput, ElButton, ElTabs, ElTabPane, ElAvatar, ElRadioGroup, ElRadio, ElDatePicker, ElMessageBox } from 'element-plus';
 import { useUserStore } from '@/stores/modules/user';
-import { updateUserInfo, uploadAvatar } from '@/apis/user';
+import { updateUserInfo, uploadAvatar, getUserInfo } from '@/apis/user';
 import ShoppingOrder from './components/ShoppingOrder.vue';
 
 // 用户Store和路由
@@ -280,13 +280,27 @@ const handleLogout = () => {
     });
 };
 
+// 从服务器获取最新用户信息
+const fetchUserInfo = async () => {
+    try {
+        const res = await getUserInfo();
+        if (res.code === 200 && res.result) {
+            // 更新store中的用户信息
+            userStore.saveLoginInfo(userStore.token, res.result);
+            // 更新本地引用
+            userInfo.value = res.result;
+            // 重置表单
+            resetBasicForm();
+        }
+    } catch (error) {
+        console.error('获取用户信息失败:', error);
+    }
+};
+
 // 组件挂载时初始化数据
 onMounted(() => {
-    // 如果用户信息更新，重新加载
-    if (userStore.userInfo) {
-        userInfo.value = userStore.userInfo;
-        resetBasicForm();
-    }
+    // 优先从服务器获取最新的用户信息
+    fetchUserInfo();
 });
 </script>
 
