@@ -32,6 +32,9 @@ out/
 .env.production.local
 *.local
 
+# Do not ignore development environment file
+!.env.development
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
