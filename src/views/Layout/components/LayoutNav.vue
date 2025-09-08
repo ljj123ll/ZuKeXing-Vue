@@ -137,6 +137,7 @@ const toggleMobileMenu = () => {
 // 监听滚动事件
 const handleScroll = () => {
     isScrolled.value = window.scrollY > 10;
+    console.log('Scroll event triggered - scrollY:', window.scrollY, 'isScrolled:', isScrolled.value);
 };
 
 // 根据当前路由更新激活状态
@@ -181,12 +182,47 @@ watch(
     left: 0;
     z-index: 900;
     transition: all 0.3s ease;
+    color: white;
 
     &.scrolled {
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.95) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+        color: #333 !important;
     }
 
+    &.scrolled .nav-item-title {
+        color: #333 !important;
+    }
+
+    &.scrolled .nav-link-user,
+    &.scrolled .nav-link-store,
+    &.scrolled .nav-link-search {
+        color: #333 !important;
+    }
+
+    &.scrolled .search-btn {
+        background-image: url('@/assets/images/searchblack.svg') !important;
+    }
+
+    &.scrolled .user-btn {
+        background-image: url('@/assets/images/userblack.svg') !important;
+    }
+
+    &.scrolled .hamburger,
+    &.scrolled .hamburger::before,
+    &.scrolled .hamburger::after {
+        background: #333 !important;
+    }
+
+    &.scrolled .mobile-nav a {
+        color: #333 !important;
+    }
+
+    /* 增强RouterLink的样式覆盖 */
+    &.scrolled .nav-item-title.router-link-active,
+    &.scrolled .nav-item-title.router-link-exact-active {
+        color: #333 !important;
+    }
     .navbar-container {
         width: 100%;
         max-width: 1200px;
@@ -244,7 +280,7 @@ watch(
                 position: relative;
 
                 .nav-item-title {
-                    color: #333;
+                    color: white;
                     transition: all 0.3s ease;
                     display: flex;
                     align-items: center;
@@ -312,7 +348,7 @@ watch(
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: #303233;
+                    color: white;
                     text-decoration: none;
                     transition: all 0.3s ease;
 
@@ -401,7 +437,7 @@ watch(
 
                 /* 搜索图标背景图 */
                 .search-btn {
-                    background-image: url('@/assets/images/searchblack.svg');
+                    background-image: url('@/assets/images/searchwhite.svg');
                     width: 20px;
                     height: 20px;
                     display: inline-block;
@@ -436,7 +472,7 @@ watch(
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    color: #303233;
+                    color: white;
                     text-decoration: none;
                     transition: all 0.3s ease;
 
@@ -463,7 +499,7 @@ watch(
             }
 
             .user-btn {
-                background-image: url('@/assets/images/userblack.svg');
+                background-image: url('@/assets/images/userwhite.svg');
             }
 
             .store-btn {
@@ -482,22 +518,22 @@ watch(
         z-index: 1000;
 
         .hamburger {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: #333;
-            position: relative;
-            transition: all 0.3s ease;
-
-            &::before,
-            &::after {
-                content: '';
-                position: absolute;
-                width: 100%;
+                display: block;
+                width: 24px;
                 height: 2px;
-                background: #333;
+                background: white;
+                position: relative;
                 transition: all 0.3s ease;
-            }
+
+                &::before,
+                &::after {
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    height: 2px;
+                    background: white;
+                    transition: all 0.3s ease;
+                }
 
             &::before {
                 top: -8px;
@@ -557,7 +593,7 @@ watch(
                 a {
                     display: block;
                     padding: 15px 20px;
-                    color: #333;
+                    color: white;
                     text-decoration: none;
                     transition: all 0.3s ease;
 

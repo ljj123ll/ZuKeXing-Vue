@@ -104,7 +104,7 @@ const transitionActive = ref(true);
 
 // 轮播配置
 const carouselConfig = reactive({
-  height: '500px', // 轮播图高度
+  height: '700px', // 轮播图高度，从500px提高到700px
   autoPlay: true,  // 是否自动播放
   interval: 5000   // 自动播放间隔(ms)
 });
@@ -112,7 +112,7 @@ const carouselConfig = reactive({
 // 获取轮播图高度
 const carouselHeight = computed(() => {
   // 响应式调整高度，在小屏幕上降低高度
-  return window.innerWidth < 768 ? '350px' : carouselConfig.height;
+  return window.innerWidth < 768 ? '450px' : carouselConfig.height; // 小屏幕高度从350px提高到450px
 });
 
 // 获取产品数据

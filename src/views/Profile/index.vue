@@ -309,7 +309,7 @@ onMounted(() => {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: #f0f2f5;
     border-radius: 8px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
@@ -334,6 +334,7 @@ onMounted(() => {
         margin-bottom: 0;
     }
 
+    
 }
 
 .profile-avatar-section {
@@ -411,6 +412,7 @@ onMounted(() => {
 @media (max-width: 768px) {
     .profile-container {
         padding: 10px;
+        background-color: #f0f2f5;
     }
 
     .header-actions {
