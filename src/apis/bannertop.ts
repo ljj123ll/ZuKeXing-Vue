@@ -14,11 +14,11 @@ export interface BannerProduct {
 
 /**
  * 获取启用的轮播图（前端展示用）
- * GET /api/products
- * 返回所有 isActive 为 true 的产品
+ * GET /api/products/type/top
+ * 返回top类型的轮播图产品
  */
 export const getActiveBanners = async (): Promise<BannerProduct[]> => {
-  const response = await request.get('/products');
+  const response = await request.get('/products/type/top');
   return response.data || [];
 };
 
