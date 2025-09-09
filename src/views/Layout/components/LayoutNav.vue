@@ -1,5 +1,5 @@
 <template>
-    <div id="site-header" :class="{ 'scrolled': isScrolled }">
+    <div id="site-header" :class="{ 'scrolled': isScrolled, 'profile-page': isProfilePage }">
         <div class="navbar-container">
             <!-- 左边logo区域 -->
             <div class="navbar-header">
@@ -76,7 +76,7 @@
 
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { useUserStore } from '@/stores/modules/user';
 
@@ -122,6 +122,11 @@ const activeIndex = ref(0);
 const isMobileMenuOpen = ref(false);
 // 滚动状态 - 用于导航栏样式变化
 const isScrolled = ref(false);
+
+// 计算属性：判断当前是否在个人页面
+const isProfilePage = computed(() => {
+  return route.path === '/profile';
+});
 
 // 设置活跃导航项
 const setActive = (index: number) => {
@@ -184,43 +189,56 @@ watch(
     transition: all 0.3s ease;
     color: white;
 
-    &.scrolled {
+    &.scrolled,
+    &.profile-page {
         background: rgba(255, 255, 255, 0.95) !important;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
         color: #333 !important;
     }
 
-    &.scrolled .nav-item-title {
+    &.scrolled .nav-item-title,
+    &.profile-page .nav-item-title {
         color: #333 !important;
     }
 
     &.scrolled .nav-link-user,
     &.scrolled .nav-link-store,
-    &.scrolled .nav-link-search {
+    &.scrolled .nav-link-search,
+    &.profile-page .nav-link-user,
+    &.profile-page .nav-link-store,
+    &.profile-page .nav-link-search {
         color: #333 !important;
     }
 
-    &.scrolled .search-btn {
+    &.scrolled .search-btn,
+    &.profile-page .search-btn {
         background-image: url('@/assets/images/searchblack.svg') !important;
     }
 
-    &.scrolled .user-btn {
+    &.scrolled .user-btn,
+    &.profile-page .user-btn {
         background-image: url('@/assets/images/userblack.svg') !important;
     }
 
     &.scrolled .hamburger,
     &.scrolled .hamburger::before,
-    &.scrolled .hamburger::after {
+    &.scrolled .hamburger::after,
+    &.profile-page .hamburger,
+    &.profile-page .hamburger::before,
+    &.profile-page .hamburger::after {
         background: #333 !important;
     }
 
-    &.scrolled .mobile-nav a {
+    &.scrolled .mobile-nav a,
+    &.profile-page .mobile-nav a {
         color: #333 !important;
     }
 
     /* 增强RouterLink的样式覆盖 */
     &.scrolled .nav-item-title.router-link-active,
-    &.scrolled .nav-item-title.router-link-exact-active {
+    &.scrolled .nav-item-title.router-link-exact-active,
+    &.profile-page .nav-item-title.router-link-active,
+    &.profile-page .nav-item-title.router-link-exact-active {
         color: #333 !important;
     }
     .navbar-container {
